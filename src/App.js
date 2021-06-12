@@ -1,20 +1,49 @@
 import React, { useState, useEffect } from 'react';
-// import { Table, Row, Col } from 'react-bootstrap';
+import { Container, Table, Row, Col } from 'react-bootstrap';
 
-function App () {
-  const [characterName] = useState
+const App = () => {
+  const [characterName, setState] = useState( "" )
 
   useEffect( () => {
     fetch( "https://swapi.dev/api/people/1" )
       .then( response => response.json() )
-      .then( data => console.log( 'data', data ) )
+      .then( data => {
+        setState( data.name )
+      } )
   } )
 
   return (
-    <div>
-      <h1>SWAPI</h1>
-      <h3>{characterName}</h3>
-    </div>
+    <Container fluid="md">
+      <Row>
+        <Col>
+          <h1>SWAPI</h1>
+        </Col>
+        <Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Height</th>
+                <th>Mass</th>
+                <th>Homeworld</th>
+                <th>Species</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{characterName}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
