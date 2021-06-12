@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
-  const [characterName, setState] = useState( "" )
+  const [name, setState] = useState( "" )
 
   useEffect( () => {
     fetch( "https://swapi.dev/api/people/1" )
@@ -40,7 +40,7 @@ const App = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{characterName}</td>
+                <td>{name}</td>
                 <td></td>
                 <td></td>
                 <td></td>
