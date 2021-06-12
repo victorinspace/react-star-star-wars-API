@@ -13,13 +13,21 @@ const App = () => {
   } )
 
   return (
-    <Container fluid="md">
+    <Container>
       <Row>
         <Col>
           <h1>SWAPI</h1>
         </Col>
+      </Row>
+      <Row>
         <Col>
-          <Table striped bordered hover>
+          <Table
+            variant="dark"
+            responsive="sm"
+            striped
+            bordered
+            hover
+          >
             <thead>
               <tr>
                 <th>Name</th>
