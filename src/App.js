@@ -4,24 +4,25 @@ import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [names, setName] = useState( [] );
-  // const [homeworld, setHomeworld] = useState([]);
-  // const [species, setSpecies] = useState([]);
-
-  const fetchData = async () => {
-    await axios
-      .get( 'https://swapi.dev/api/people/' )
-      .then( response => {
-        // console.log( response.data.results );
-        const characters = response.data;
-        setName( characters.results );
-      } );
-
-    console.log( 'names: ', names );
-  };
+  const [homeworld, setHomeworld] = useState( [] );
+  const [species, setSpecies] = useState( [] );
 
   useEffect( () => {
+    const fetchData = async () => {
+      await axios
+        .get( 'https://swapi.dev/api/people/' )
+        .then( response => {
+          // console.log( response.data.results );
+
+          const characters = response.data;
+          setName( prevName => characters.results );
+        } );
+
+      // console.log( 'names: ', names );
+    };
+
     fetchData();
-  }, [] );
+  }, [names] );
 
   return (
     <Container>
@@ -51,9 +52,9 @@ const App = () => {
             <tbody>
               {names.map( name => {
                 return (
-                  <tr>
+                  <tr key={name.id}>
                     <td>{name.name}</td>
-                    <td>{name.birthDate}</td>
+                    <td>{name.birth_year}</td>
                     <td>{name.height}</td>
                     <td>{name.mass}</td>
                     <td>{name.homeworld}</td>
