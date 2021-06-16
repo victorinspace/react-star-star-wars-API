@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Characters from './components/Characters';
 import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [names, setName] = useState( [] );
-  const [homeworld, setHomeworld] = useState( [] );
-  const [species, setSpecies] = useState( [] );
+  const [charactersUrl, setCharactersUrl] = useState( 0 );
 
   useEffect( () => {
     const fetchData = async () => {
-      await axios
-        .get( 'https://swapi.dev/api/people/' )
-        .then( response => {
-          // console.log( response.data.results );
+      setCharactersUrl( 'https://swapi.dev/api/people/' );
 
-          const characters = response.data;
-          setName( prevName => characters.results );
-        } );
+      await axios.get( charactersUrl ).then( response => {
+        console.log( response.data.results );
 
-      // console.log( 'names: ', names );
+        const characters = response.data;
+
+        setName( characters.results );
+      } );
     };
 
     fetchData();
-  }, [names] );
+  }, [charactersUrl] );
 
   return (
     <Container>
@@ -50,18 +49,7 @@ const App = () => {
               </tr>
             </thead>
             <tbody>
-              {names.map( name => {
-                return (
-                  <tr key={name.id}>
-                    <td>{name.name}</td>
-                    <td>{name.birth_year}</td>
-                    <td>{name.height}</td>
-                    <td>{name.mass}</td>
-                    <td>{name.homeworld}</td>
-                    <td>{name.species}</td>
-                  </tr>
-                );
-              } )}
+              <Characters names={names} />
             </tbody>
           </Table>
         </Col>
