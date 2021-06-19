@@ -4,7 +4,7 @@ import Characters from './components/Characters';
 import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
-  const [characters, setName] = useState( [] );
+  const [characters, setCharacterData] = useState( [] );
   // const [charactersUrl, setCharactersUrl] = useState( 0 );
 
   useEffect( () => {
@@ -13,10 +13,10 @@ const App = () => {
 
       // setCharactersUrl( 'https://swapi.dev/api/' );
 
-      const url = 'https://swapi.dev/api/';
+      const swapiUrl = 'https://swapi.dev/api/';
 
       await axios
-        .get( `${url}people` )
+        .get( `${swapiUrl}people` )
         .then( response => {
 
           // first ten characters array
@@ -32,7 +32,7 @@ const App = () => {
 
           // update characters
 
-          setName( characters );
+          setCharacterData( characters );
 
           console.log( 'characters: ', characters );
         } )

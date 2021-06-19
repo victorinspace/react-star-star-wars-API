@@ -6,7 +6,7 @@ const Characters = ( props ) => {
   return (
     props.characters.map( character => {
       return (
-        <tr>
+        <tr key={character.id}>
           <td>{character.name}</td>
           <td>{character.birth_year}</td>
           <td>{`${character.height} cm`}</td>
