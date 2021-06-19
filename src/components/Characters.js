@@ -1,12 +1,10 @@
 import React from 'react';
 
 const Characters = ( props ) => {
-  console.log( 'props:', props );
-
   return (
     props.characters.map( character => {
       return (
-        <tr key={character.id}>
+        <tr key={character.name}>
           <td>{character.name}</td>
           <td>{character.birth_year}</td>
           <td>{`${character.height} cm`}</td>

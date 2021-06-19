@@ -7,42 +7,29 @@ const App = () => {
   const [characters, setCharacterData] = useState( [] );
 
   useEffect( () => {
-
     const fetchData = async () => {
 
       const swapiUrl = 'https://swapi.dev/api/';
 
-      await axios
-        .get( `${swapiUrl}people` )
-        .then( response => {
+      try {
+        const charactersData = await axios
+          .get( `${swapiUrl}people` )
+          .then( response => response.data.results );
 
-          const charactersData = response.data.results;
-          console.log( 'charactersData: ', charactersData );
+        for ( const character of charactersData ) {
+          const homeworld = await axios
+            .get( character.homeworld );
 
-          // console.log( 'url for hw: ', charactersData[2].homeworld );
+          character.homeworld = homeworld.data.name;
+        }
 
-          for ( let i = 0; i < charactersData.length; i++ ) {
-            axios
-              .get( charactersData[i].homeworld )
-              .then( response => {
-                console.log( response );
-                const homeworldData = response.data.name;
-                return homeworldData;
-              } )
-              .catch( error => console.log( error ) );
-          }
-
-          // update charactersData
-
-          setCharacterData( charactersData );
-
-        } )
-        .catch( error => console.log( error ) );
-
+        setCharacterData( charactersData );
+      } catch ( error ) {
+        console.log( error );
+      }
     };
 
     fetchData();
-
   }, [] );
 
   return (
