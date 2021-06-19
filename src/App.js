@@ -11,13 +11,15 @@ const App = () => {
     const fetchData = async () => {
       setCharactersUrl( 'https://swapi.dev/api/people/' );
 
-      await axios.get( charactersUrl ).then( response => {
-        console.log( response.data.results );
-
-        const characters = response.data;
-
-        setName( characters.results );
-      } );
+      await
+        axios
+          .get( charactersUrl )
+          .then( response => {
+            console.log( response.data.results );
+            const characters = response.data;
+            setName( characters.results );
+          } )
+          .catch( error => console.log( error ) );
     };
 
     fetchData();
@@ -31,28 +33,26 @@ const App = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
-          <Table
-            variant="dark"
-            striped
-            bordered
-            hover
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Birth Date</th>
-                <th>Height</th>
-                <th>Mass</th>
-                <th>Homeworld</th>
-                <th>Species</th>
-              </tr>
-            </thead>
-            <tbody>
-              <Characters names={names} />
-            </tbody>
-          </Table>
-        </Col>
+        <Table
+          variant="dark"
+          striped
+          bordered
+          hover
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Birth Date</th>
+              <th>Height</th>
+              <th>Mass</th>
+              <th>Homeworld</th>
+              <th>Species</th>
+            </tr>
+          </thead>
+          <tbody>
+            <Characters names={names} />
+          </tbody>
+        </Table>
       </Row>
     </Container>
   );
