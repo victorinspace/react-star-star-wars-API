@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Characters from './components/Characters';
-import { Container, Table, Row, Col } from 'react-bootstrap';
+import { Container, Form, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [characters, setCharacterData] = useState( [] );
@@ -20,7 +20,13 @@ const App = () => {
           const homeworld = await axios
             .get( character.homeworld );
 
+          const species = await axios
+            .get( character.species );
+
+          console.log( species );
+
           character.homeworld = homeworld.data.name;
+          character.species = species.data.name;
         }
 
         setCharacterData( charactersData );
@@ -36,7 +42,16 @@ const App = () => {
     <Container>
       <Row>
         <Col>
-          <h1>SWAPI</h1>
+          <h1 className='display-2'>
+            <em>SWAPI</em>
+          </h1>
+        </Col>
+        <Col>
+          <Form>
+            <Form.Group>
+              <Form.Control type='search' placeholder='search' />
+            </Form.Group>
+          </Form>
         </Col>
       </Row>
       <Row>
