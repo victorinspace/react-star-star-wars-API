@@ -5,13 +5,10 @@ import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [characters, setCharacterData] = useState( [] );
-  // const [charactersUrl, setCharactersUrl] = useState( 0 );
 
   useEffect( () => {
 
     const fetchData = async () => {
-
-      // setCharactersUrl( 'https://swapi.dev/api/' );
 
       const swapiUrl = 'https://swapi.dev/api/';
 
@@ -19,22 +16,26 @@ const App = () => {
         .get( `${swapiUrl}people` )
         .then( response => {
 
-          // first ten characters array
+          const charactersData = response.data.results;
+          console.log( 'charactersData: ', charactersData );
 
-          const characters = response.data.results;
+          // console.log( 'url for hw: ', charactersData[2].homeworld );
 
-          // loop through each character
+          for ( let i = 0; i < charactersData.length; i++ ) {
+            axios
+              .get( charactersData[i].homeworld )
+              .then( response => {
+                console.log( response );
+                const homeworldData = response.data.name;
+                return homeworldData;
+              } )
+              .catch( error => console.log( error ) );
+          }
 
-          // make an HTTP request for the character's planet
-          // when that comes back
+          // update charactersData
 
-          // set a property on character called homeworldName equal to response data
+          setCharacterData( charactersData );
 
-          // update characters
-
-          setCharacterData( characters );
-
-          console.log( 'characters: ', characters );
         } )
         .catch( error => console.log( error ) );
 
