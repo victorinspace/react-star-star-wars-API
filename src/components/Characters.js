@@ -4,15 +4,15 @@ const Characters = ( props ) => {
   console.log( 'props:', props );
 
   return (
-    props.names.map( name => {
+    props.characters.map( character => {
       return (
         <tr>
-          <td>{name.name}</td>
-          <td>{name.birth_year}</td>
-          <td>{name.height}</td>
-          <td>{name.mass}</td>
-          <td>{name.homeworld}</td>
-          <td>{name.species}</td>
+          <td>{character.name}</td>
+          <td>{character.birth_year}</td>
+          <td>{`${character.height} cm`}</td>
+          <td>{`${character.mass} kg`}</td>
+          <td>{character.homeworld}</td>
+          <td>{character.species}</td>
         </tr>
       );
     } )

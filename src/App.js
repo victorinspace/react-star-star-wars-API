@@ -4,26 +4,45 @@ import Characters from './components/Characters';
 import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
-  const [names, setName] = useState( [] );
-  const [charactersUrl, setCharactersUrl] = useState( 0 );
+  const [characters, setName] = useState( [] );
+  // const [charactersUrl, setCharactersUrl] = useState( 0 );
 
   useEffect( () => {
-    const fetchData = async () => {
-      setCharactersUrl( 'https://swapi.dev/api/people/' );
 
-      await
-        axios
-          .get( charactersUrl )
-          .then( response => {
-            console.log( response.data.results );
-            const characters = response.data;
-            setName( characters.results );
-          } )
-          .catch( error => console.log( error ) );
+    const fetchData = async () => {
+
+      // setCharactersUrl( 'https://swapi.dev/api/' );
+
+      const url = 'https://swapi.dev/api/';
+
+      await axios
+        .get( `${url}people` )
+        .then( response => {
+
+          // first ten characters array
+
+          const characters = response.data.results;
+
+          // loop through each character
+
+          // make an HTTP request for the character's planet
+          // when that comes back
+
+          // set a property on character called homeworldName equal to response data
+
+          // update characters
+
+          setName( characters );
+
+          console.log( 'characters: ', characters );
+        } )
+        .catch( error => console.log( error ) );
+
     };
 
     fetchData();
-  }, [charactersUrl] );
+
+  }, [] );
 
   return (
     <Container>
@@ -50,7 +69,7 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            <Characters names={names} />
+            <Characters characters={characters} />
           </tbody>
         </Table>
       </Row>
