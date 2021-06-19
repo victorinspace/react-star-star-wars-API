@@ -10,8 +10,10 @@ const Search = ( props ) => {
 
   const searchCharacterData = ( e ) => {
     e.preventDefault();
-    props.search( searchValue );
+
   };
+
+  console.log( `${props.searchQuery}?search=${searchValue}` );
 
   return (
     <Form>

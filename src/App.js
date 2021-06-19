@@ -6,12 +6,10 @@ import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [characters, setCharacterData] = useState( [] );
+  const swapiUrl = 'https://swapi.dev/api/';
 
   useEffect( () => {
     const fetchData = async () => {
-
-      const swapiUrl = 'https://swapi.dev/api/';
-
       try {
         const charactersData = await axios
           .get( `${swapiUrl}people` )
@@ -48,7 +46,7 @@ const App = () => {
           </h1>
         </Col>
         <Col className='pt-2'>
-          <Search />
+          <Search searchQuery={swapiUrl} />
         </Col>
       </Row>
       <Row>
