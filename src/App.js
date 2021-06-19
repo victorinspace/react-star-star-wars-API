@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Characters from './components/Characters';
-import { Container, Form, Table, Row, Col } from 'react-bootstrap';
+import Search from './components/Search';
+import { Container, Table, Row, Col } from 'react-bootstrap';
 
 const App = () => {
   const [characters, setCharacterData] = useState( [] );
@@ -40,18 +41,14 @@ const App = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className='pt-3 pb-1'>
         <Col>
           <h1 className='display-2'>
             <em>SWAPI</em>
           </h1>
         </Col>
-        <Col>
-          <Form>
-            <Form.Group>
-              <Form.Control type='search' placeholder='search' />
-            </Form.Group>
-          </Form>
+        <Col className='pt-2'>
+          <Search />
         </Col>
       </Row>
       <Row>
