@@ -22,8 +22,6 @@ const App = () => {
           const species = await axios
             .get( character.species );
 
-          console.log( species );
-
           character.homeworld = homeworld.data.name;
           character.species = species.data.name;
         }

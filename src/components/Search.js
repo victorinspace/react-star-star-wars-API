@@ -10,7 +10,7 @@ const Search = ( props ) => {
 
   const searchCharacterData = ( e ) => {
     e.preventDefault();
-
+    console.log( 'search initiated' );
   };
 
   console.log( `${props.searchQuery}?search=${searchValue}` );
